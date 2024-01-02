@@ -1,34 +1,62 @@
-import React from "react";
-import BannerBackground from "../Assets/home-banner-background.png";
-import BannerImage from "../Assets/home-banner-image.png";
+import React, { useState } from "react";
+import PickMeals from "../Assets/pick-meals-image.jpg";
+import ChooseMeals from "../Assets/choose-image.jpg";
+import DeliveryMeals from "../Assets/delivery-image.jpg";
 import Navbar from "./Navbar";
-import { FiArrowRight } from "react-icons/fi";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa"; // Ok ikonlarını ekleyin
 
 const Anasayfa = () => {
+  const makaleInfoData = [
+    {
+      image: PickMeals,
+      title: "Akıllı Tarım Teknolojileri",
+      text: "",
+    },
+    {
+      image: ChooseMeals,
+      title: "Organik Gübre ve Doğal Zararlı Kontrolü",
+      text: " ",
+    },
+    {
+      image: DeliveryMeals,
+      title: "Su Yönetimi",
+      text: "",
+    },
+  ];
+
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const handlePrevClick = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex - 1 + makaleInfoData.length) % makaleInfoData.length);
+  };
+
+  const handleNextClick = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % makaleInfoData.length);
+  };
+
   return (
-    <div className="home-container">
+    <div className="work-section-wrapper">
       <Navbar />
-      <div className="home-banner-container">
-        <div className="home-bannerImage-container">
-          <img src={BannerBackground} alt="" />
+
+      <div className="home-text-section">
+        <h1 className="baslik">Ana Sayfa</h1>
+        <p className="primary-text"></p>
+      </div>
+      <div className="work-section-bottom">
+        <div className="arrow-icons-left">
+          <FaArrowLeft onClick={handlePrevClick} />
         </div>
-        <div className="home-text-section">
-        <p className="primary-subheading">Su Tüketimi</p>
-          <h1 className="primary-heading">
-            Bitkilerin Verimli Büyüyebilmesi için Sulama ve Su Miktarı
-          </h1>         
-          <p className="primary-text">
-          Toprak nem seviyesi önemlidir; yüzey kuruduğunda sulama yapılmalı, özellikle ilk 2-3 cm kuruduktan sonra sulama uygundur. 
-          Bitki türüne göre su ihtiyacı değişir; sebzeler genellikle daha fazla suya ihtiyaç duyar. 
-          Hava koşulları etkili; sıcak hava, düşük nem ve rüzgar bitkilerin su kaybetmesini artırabilir, bu durumda sık sulama gerekebilir. Toprak tipi önemlidir; killi topraklar seyrek, kumlu topraklar sık sulamayı gerektirebilir. Sulama zamanı kritiktir; sabah/akşam sulama, suyun etkili emilimini sağlar. İyi drenaj önemli; köklerin oksijen almasını ve aşırı sulamayı önler. 
-          Sulama suyu toprak derinliğine ulaşacak şekilde, yüzeyden derine doğru uygulanmalıdır.
-          </p>
-          <button className="secondary-button">
-            Daha Fazla Öğren <FiArrowRight />{" "}
-          </button>
+
+        <div className="gorsel" key={makaleInfoData[currentImageIndex].title}>
+          <div className="info-boxes-img-container">
+            <img src={makaleInfoData[currentImageIndex].image} alt="" />
+          </div>
+          <h2>{makaleInfoData[currentImageIndex].title}</h2>
+          <p>{makaleInfoData[currentImageIndex].text}</p>
         </div>
-        <div className="home-image-section">
-          <img src={BannerImage} alt="" />
+
+        <div className="arrow-icons-right">
+          <FaArrowRight onClick={handleNextClick} />
         </div>
       </div>
     </div>
@@ -36,3 +64,6 @@ const Anasayfa = () => {
 };
 
 export default Anasayfa;
+
+
+
