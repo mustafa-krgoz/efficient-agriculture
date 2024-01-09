@@ -10,6 +10,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import { Link, animateScroll as scroll } from "react-scroll";
 
 
 const Navbar = () => {
@@ -17,47 +18,46 @@ const Navbar = () => {
   const sekmeOptions = [
     {
       text: "AnaSayfa",
-      
-    },
-    {
-      text: "Bitki Verileri ",
-      
+      target: "anasayfa",
     },
     {
       text: "Su Tüketimi",
-     
+      target: "su-tuketimi",
     },
-
+    {
+      text: "Bitki Verileri",
+      target: "bitki-verileri",
+    },
     {
       text: "Bilgiler",
+      target: "bilgiler",
     },
-
     {
       text: "Makale",
-    },
-    {
-      text: "Hakkımızda",
-      
+      target: "makale",
     },
     {
       text: "SSS",
-      
+      target: "sss",
     },
-
+    {
+      text: "Hakkımızda",
+      target: "hakkimizda",
+    },
+    
   ];
+
   return (
     <nav>
       <div className="nav-logo-container">
         <img src={Logo} alt="" />
       </div>
       <div className="navbar-links-container">
-        <a href="">Ana Sayfa</a>
-        <a href="">Bitki Verileri</a>
-        <a href="">Su Tüketimi</a>
-        <a href="">Bilgiler</a>
-        <a href="">Makale</a>
-        <a href="">Hakkımızda</a>
-        <a href="">SSS</a>        
+        {sekmeOptions.map((item) => (
+          <Link key={item.text} to={item.target} smooth={true} duration={500}>
+            {item.text}
+          </Link>
+        ))}
       </div>
       <div className="navbar-menu-container">
         <HiOutlineBars3 onClick={() => setOpenSekme(true)} />
@@ -72,9 +72,10 @@ const Navbar = () => {
           <List>
             {sekmeOptions.map((item) => (
               <ListItem key={item.text} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>{item.icon}</ListItemIcon>
-                  <ListItemText primary={item.text} />
+                <ListItemButton onClick={() => setOpenSekme(false)}>
+                  <Link to={item.target} smooth={true} duration={500}>
+                    <ListItemText primary={item.text} />
+                  </Link>
                 </ListItemButton>
               </ListItem>
             ))}
@@ -83,7 +84,6 @@ const Navbar = () => {
         </Box>
       </Drawer>
     </nav>
-  
   );
 };
 

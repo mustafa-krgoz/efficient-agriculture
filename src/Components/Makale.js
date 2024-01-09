@@ -21,6 +21,7 @@ const Makale = () => {
       text: "Su, tarımın temel bir unsuru olup etkili bir şekilde yönetilmelidir. Drip sulama sistemleri, yağmurlama sistemleri ve su tasarruflu teknolojiler, suyun doğru ve etkili bir şekilde kullanılmasını sağlayarak tarımsal üretimi optimize eder.",
     },
   ];
+  
   return (
     <div className="work-section-wrapper">
       <div className="work-section-top">

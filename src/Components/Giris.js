@@ -7,9 +7,15 @@ const LoginForm = () => {
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    // Kullanıcı girişi işlemleri burada yapılır
-    console.log('Admin Girişi:', username);
-    console.log('Şifre:', password);
+    // Kullanıcı adı ve şifrenin boş olup olmadığını kontrol et
+    if (username.trim() !== '' && password.trim() !== '') {
+      // Giriş mantığını burada gerçekleştir
+      console.log('Admin Girişi:', username);
+      console.log('Şifre:', password);
+    } else {
+      // Hata mesajı görüntüle veya boş alanları başka bir şekilde işle
+      console.log('Lütfen kullanıcı adı ve şifreyi girin.');
+    }
   };
 
   return (
@@ -38,9 +44,11 @@ const LoginForm = () => {
         </div>
       </div>
 
+      {/* Giriş Yap butonu */}
       <button onClick={handleLogin}>Giriş Yap</button>
     </div>
   );
 };
 
 export default LoginForm;
+
