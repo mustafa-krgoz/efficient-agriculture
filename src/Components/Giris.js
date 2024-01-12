@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
 
-const LoginForm = () => {
+const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -12,6 +13,23 @@ const LoginForm = () => {
       // Giriş mantığını burada gerçekleştir
       console.log('Admin Girişi:', username);
       console.log('Şifre:', password);
+
+      // Axios kullanarak giriş isteğini gönder
+      axios.get(`http://localhost:4500/api/people/${username}`, {
+        username: username,
+        password: password,
+      })
+      .then(response => {
+        // Handle successful login response
+        if(username===response.data.Username && password===response.data.Password)
+          console.log('Login Successful. You Are Being Redirected!');
+        else
+          console.log('Login Failed');
+      })
+      .catch(error => {
+        // Handle login error
+        console.error('Login error:', error);
+      });
     } else {
       // Hata mesajı görüntüle veya boş alanları başka bir şekilde işle
       console.log('Lütfen kullanıcı adı ve şifreyi girin.');
@@ -50,5 +68,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
-
+export default Login;
